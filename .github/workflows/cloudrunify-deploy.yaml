@@ -16,8 +16,6 @@ jobs:
       - name: Download CloudRunify Binary
         run: |
           curl -L -o cloudrunify "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify-v0.0.1"
-          ls -la
-          mv cloudrunify-v0.0.1 cloudrunify
           chmod +x cloudrunify
           ./cloudrunify deploy -k json
 
