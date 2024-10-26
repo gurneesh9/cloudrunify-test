@@ -17,6 +17,7 @@ jobs:
         run: |
           curl -L -o cloudrunify "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify-v0.0.1"
           chmod +x cloudrunify
+          ./cloudrunify deploy -k json
 
       - name: Deploy to Cloud Run
         env:
