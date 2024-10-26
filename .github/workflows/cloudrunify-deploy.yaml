@@ -18,14 +18,12 @@ jobs:
           curl -L -o cloudrunify "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify-linux-x64-v0.0.1"
           chmod +x cloudrunify
           ls -la cloudrunify
-          cat cloudrunify
-          file cloudrunify
           ./cloudrunify deploy -k json
 
-      - name: Deploy to Cloud Run
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/gcloud.json
-        run: |
-          ./cloudrunify deploy -k json
+          #      - name: Deploy to Cloud Run
+          #        env:
+          #          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/gcloud.json
+          #        run: |
+          #          ./cloudrunify deploy -k json
 
 
