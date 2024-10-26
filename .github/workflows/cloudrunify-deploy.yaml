@@ -1,0 +1,35 @@
+name: CloudRunify Deployment
+
+on:
+  push:
+    branches:
+      - main  # Change to the branch you want to trigger the deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Download CloudRunify Binary
+        run: |
+          curl -L -o cloudrunify "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify-v0.0.1"
+          chmod +x cloudrunify
+
+      - name: Set up Google Cloud Credentials
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/gcloud.json
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS }}" > "${GOOGLE_APPLICATION_CREDENTIALS}"
+          gcloud auth activate-service-account --key-file="${GOOGLE_APPLICATION_CREDENTIALS}"
+          gcloud config set project YOUR_PROJECT_ID
+
+      - name: Deploy to Cloud Run
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/gcloud.json
+        run: |
+          ./cloudrunify deploy -k json
+
+
