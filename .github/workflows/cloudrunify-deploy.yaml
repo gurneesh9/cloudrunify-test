@@ -16,13 +16,11 @@ jobs:
       - name: Set up Google Cloud Credentials
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
           echo "$GOOGLE_CREDENTIALS" > $HOME/gcloud.json
           gcloud auth activate-service-account --key-file=$HOME/gcloud.json
           gcloud config set project <YOUR_PROJECT_ID>
-        # Set GOOGLE_APPLICATION_CREDENTIALS for ADC to use the service account JSON
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
 
       - name: Download CloudRunify Binary
         run: |
