@@ -13,13 +13,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Google Cloud Credentials
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Set Google Cloud Project
         run: |
-          echo "$GOOGLE_CREDENTIALS" > $HOME/gcloud.json
-          gcloud auth activate-service-account --key-file=$HOME/gcloud.json
           gcloud config set project scrape-429402
 
       - name: Download CloudRunify Binary
