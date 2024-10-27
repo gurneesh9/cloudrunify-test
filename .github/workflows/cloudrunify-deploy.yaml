@@ -21,7 +21,5 @@ jobs:
       - name: Set Google Cloud Project
         run: |
           gcloud config set project scrape-429402
-          curl -L -o cloudrunify "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify-linux-x64-v0.0.1"
-          chmod +x cloudrunify
-          ls -la cloudrunify
-          ./cloudrunify deploy
+          curl -L -o cloudrunify.js "https://github.com/gurneesh9/cloudrunify/releases/download/v0.0.1/cloudrunify.js"
+          node cloudrunify.js deploy
